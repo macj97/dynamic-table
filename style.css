@@ -1,0 +1,35 @@
+/*
+File: style.css
+GUI Assignment: HW3 - Creating an Interactive Dynamic Table
+Description: CSS file for Assignment 3
+Joe Plummer, UMass Lowell Computer Science, joseph_plummer@student.uml.edu
+Copyright (c) 2026 by Joe Plummer. All rights reserved. May be freely copied or excerpted for educational purposes with credit to the author.
+*/
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(190, 242, 224);
+}
+
+#Table {
+    margin: 20px;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+table > *:not(.hide-cell) {
+    background-color: rgb(253, 255, 160);
+}
+th, td {
+    padding: 10px;
+}
+th {
+    background-color: rgb(228, 122, 143);
+}
+tr:nth-child(even) {
+    background-color: rgb(255, 203, 138);
+}
+.hide-cell {
+    visibility: hidden;
+}
