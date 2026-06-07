@@ -1,16 +1,18 @@
-/*
-File: style.css
-GUI Assignment: HW3 - Creating an Interactive Dynamic Table
-Description: CSS file for Assignment 3
-Joe Plummer, UMass Lowell Computer Science, joseph_plummer@student.uml.edu
-Copyright (c) 2026 by Joe Plummer. All rights reserved. May be freely copied or excerpted for educational purposes with credit to the author.
-*/
+/**
+ * File: style.css
+ * GUI Assignment: HW3 - Creating an Interactive Dynamic Table
+ * Description: CSS file for Assignment 3
+ * Joe Plummer, UMass Lowell Computer Science, joseph_plummer@student.uml.edu
+ * Copyright (c) 2026 by Joe Plummer. All rights reserved. May be freely copied or excerpted for educational purposes with credit to the author.
+ */
 
+/* overall look of the page */
 body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(190, 242, 224);
 }
 
+/* table */
 #Table {
     margin: 20px;
 }
