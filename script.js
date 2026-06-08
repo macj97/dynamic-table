@@ -8,13 +8,23 @@
 
 console.log("Starting...");
 
+// let elements;
+let minColNum, maxColNum, minRowNum, maxRowNum;
 
-
+// Event listener for when Submit button is pressed
 document.getElementById("submit-btn").addEventListener('click', function() {
     console.log("Hello");
+
+    // getting the values from the form
+    minColNum = document.getElementById("mincolval").value;
+    console.log(minColNum);
+    maxColNum = document.getElementById("maxcolval").value;
+    console.log(maxColNum);
+    minRowNum = document.getElementById("minrowval").value;
+    console.log(minRowNum);
+    maxRowNum = document.getElementById("maxrowval").value;
+    console.log(maxRowNum);
 });
 
-// console.log(num);
-console.log("Ending...");
 
-// document.write(minColNum)
+console.log("Ending...");
