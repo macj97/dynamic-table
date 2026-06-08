@@ -90,7 +90,6 @@ document.getElementById("submit-btn").addEventListener('click', function() {
     minColNum = document.getElementById("mincolval").value;
     // console.log(minColNum); // debugging
     if (!Number.isInteger(Number(minColNum))) { // if not a number
-        console.log("wasn't a number...");
         turnOffErrorMessages();
         createErrorElement(document.getElementById("mincolval"), 0);
         return;

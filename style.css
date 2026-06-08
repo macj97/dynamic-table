@@ -21,6 +21,13 @@ body {
     align-items: center;
 }
 
+/* error messages */
+.error {
+    color: red;
+    margin-left: 20px;
+    width: 200px;
+}
+
 /* table */
 #Table-container {
     margin: 20px;
@@ -63,3 +70,4 @@ tr:nth-child(even) {
     left: 0;
     z-index: 1;
 }
+
