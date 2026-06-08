@@ -22,6 +22,7 @@ let minColNum_e = false, maxColNum_e = false,
 let table_container = document.getElementById("Table-container");
 
 function withinBounds(x) {
+    x = Number(x);
     if (x < -50 || x > 50) {
         return false;
     }
@@ -31,10 +32,15 @@ function withinBounds(x) {
 }
 
 function isMinLEMax(x, y) {
+    x = Number(x);
+    y = Number(y);
+    console.log("x = ", x, ", y = ", y);
     if (x <= y) {
+        console.log("Returning true...");
         return true;
     }
     else {
+        console.log("Returning false...");
         return false;
     }
 }
@@ -42,7 +48,8 @@ function isMinLEMax(x, y) {
 /**
  * Function creates an element that shows an error message
  * @param   elem    element    element before the error element is being placed
- * @param   e       int        0-error message for bounds, 1-error message for min and max
+ * @param   e       int        0-error message for bounds and non-number input, 
+ *                             1-error message for min and max
  * @return  N/A
  */
 function createErrorElement(elem, e) {
@@ -57,6 +64,7 @@ function createErrorElement(elem, e) {
             break;
     }
     elem.after(msg);
+    table_container.innerHTML = "";
 }
 
 
@@ -78,6 +86,12 @@ document.getElementById("submit-btn").addEventListener('click', function() {
     // getting the values from the form (with error handling)
     minColNum = document.getElementById("mincolval").value;
     console.log(minColNum);
+    if (!Number.isInteger(Number(minColNum))) { // if not a number
+        console.log("wasn't a number...");
+        turnOffErrorMessages();
+        createErrorElement(document.getElementById("mincolval"), 0);
+        return;
+    }
     if (!withinBounds(minColNum)) { // if not within bounds
         // if (!minColNum_e) { 
         //     createErrorElement(document.getElementById("mincolval"), 0);
@@ -90,6 +104,11 @@ document.getElementById("submit-btn").addEventListener('click', function() {
 
     maxColNum = document.getElementById("maxcolval").value;
     console.log(maxColNum);
+    if (!Number.isInteger(Number(maxColNum))) { // if not a number
+        turnOffErrorMessages();
+        createErrorElement(document.getElementById("maxcolval"), 0);
+        return;
+    }
     if (!withinBounds(maxColNum)) { // if not within bounds
         // if (!maxColNum_e) {
         //     createErrorElement(document.getElementById("maxcolval"), 0);
@@ -99,14 +118,19 @@ document.getElementById("submit-btn").addEventListener('click', function() {
         createErrorElement(document.getElementById("maxcolval"), 0);
         return;
     }
-    // if (!isMinLEMax(minColNum, maxColNum)) { // if min is not less than max
-    //     createErrorElement(document.getElementById("maxcolval"), 1);
-    //     maxColNum_e = true;
-    //     return;
-    // }
+    if (!isMinLEMax(minColNum, maxColNum)) { // if min is not less than max
+        turnOffErrorMessages();
+        createErrorElement(document.getElementById("maxcolval"), 1);
+        return;
+    }
 
     minRowNum = document.getElementById("minrowval").value;
     console.log(minRowNum);
+    if (!Number.isInteger(Number(minRowNum))) { // if not a number
+        turnOffErrorMessages();
+        createErrorElement(document.getElementById("minrowval"), 0);
+        return;
+    }
     if (!withinBounds(minRowNum)) {
         // if (!minRowNum_e) {
         //     createErrorElement(document.getElementById("minrowval"));
@@ -119,6 +143,11 @@ document.getElementById("submit-btn").addEventListener('click', function() {
 
     maxRowNum = document.getElementById("maxrowval").value;
     console.log(maxRowNum);
+    if (!Number.isInteger(Number(maxRowNum))) { // if not a number
+        turnOffErrorMessages();
+        createErrorElement(document.getElementById("maxrowval"), 0);
+        return;
+    }
     if (!withinBounds(maxRowNum)) {
         // if (!maxRowNum_e) {
         //     createErrorElement(document.getElementById("maxrowval"));
@@ -128,9 +157,15 @@ document.getElementById("submit-btn").addEventListener('click', function() {
         createErrorElement(document.getElementById("maxrowval"), 0);
         return;
     }
+    if (!isMinLEMax(minRowNum, maxRowNum)) { // if min is not less than max
+        turnOffErrorMessages();
+        createErrorElement(document.getElementById("maxrowval"), 1);
+        return;
+    }
+
+    turnOffErrorMessages();
 
     
-
     // building the table
     console.log(table_container);
     table_container.innerHTML = ""
@@ -138,6 +173,7 @@ document.getElementById("submit-btn").addEventListener('click', function() {
 
     // first row:
     const headerRow = document.createElement("tr");
+    // headerRow.className = "header-row";
     const hiddenCell = document.createElement("th");
     hiddenCell.className = "hide-cell";
     headerRow.appendChild(hiddenCell);
@@ -147,6 +183,7 @@ document.getElementById("submit-btn").addEventListener('click', function() {
     for (i; i <= maxColNum; i++) {
         const headerCell = document.createElement("th");
         headerCell.textContent = i;
+        headerCell.className = "header-row";
         headerRow.appendChild(headerCell);
     }
     dTable.appendChild(headerRow);
@@ -155,6 +192,7 @@ document.getElementById("submit-btn").addEventListener('click', function() {
     for (j; j <= maxRowNum; j++) {
         const dRow = document.createElement("tr");
         const hCell = document.createElement("th");
+        hCell.className = "header-column";
         hCell.textContent = j;
         dRow.appendChild(hCell);
         for (i = minColNum; i <= maxColNum; i++) {
